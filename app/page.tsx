@@ -6,11 +6,23 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-[#FAF9F6] text-[#1a1a1a] font-serif">
       {/* 導覽列 */}
-      <nav className="sticky top-0 z-50 border-b border-stone-200 bg-white/90 backdrop-blur-sm px-8 py-5">
-        <div className="flex items-center justify-between max-w-7xl mx-auto w-full">
-          <div className="text-xs tracking-[0.3em] font-light">COLLECTIONS</div>
-          <div className="text-2xl tracking-[0.5em] font-bold">RIGHT</div>
-          <div className="text-sm tracking-[0.3em] font-light uppercase">Boutique</div>
+      {/* 導覽列 - 修正手機版擁擠問題 */}
+      <nav className="sticky top-0 z-50 border-b border-stone-200 bg-white/90 backdrop-blur-sm px-4 py-4 md:px-8 md:py-5">
+        <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto w-full gap-2 md:gap-0">
+          {/* 手機版會隱藏或縮小的左側文字 */}
+          <div className="text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] font-light text-stone-400 md:text-stone-900">
+            COLLECTIONS
+          </div>
+          
+          {/* 品牌主標題 - 在手機版置中且加大一點點 */}
+          <div className="text-xl md:text-2xl tracking-[0.4em] md:tracking-[0.5em] font-bold py-1 md:py-0">
+            RIGHT
+          </div>
+          
+          {/* 右側文字 */}
+          <div className="text-[10px] md:text-sm tracking-[0.2em] md:tracking-[0.3em] font-light uppercase text-stone-400 md:text-stone-900">
+            Boutique
+          </div>
         </div>
       </nav>
 
