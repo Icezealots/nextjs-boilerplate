@@ -61,9 +61,11 @@ export default function Home() {
           <button className="bg-[#1a1a1a] px-12 py-5 text-white hover:bg-stone-800 transition-all duration-500">
             預約專屬鑑賞
           </button>
-          <button className="border border-stone-300 px-12 py-5 hover:bg-white transition-all duration-500">
+          
+          {/* 修改這裡：Link到collection頁面 */}
+          <Link href="/collections" className="border border-stone-300 px-12 py-5 hover:bg-white transition-all duration-500 inline-block text-center cursor-pointer">
             探索全系列
-          </button>
+          </Link>
         </div>
       </main>
 
