@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, MessageSquare, Zap, Shield } from "lucide-react"; // 記得要 npm install lucide-react
+import { ArrowRight, MessageSquare, Zap, Shield } from "lucide-react";
 
 export default function Home() {
   return (
