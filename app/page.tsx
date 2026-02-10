@@ -1,27 +1,50 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react'; // 引入 useState 處理選單開關
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // 控制下拉選單狀態
+
   return (
     <div className="flex min-h-screen flex-col bg-[#FAF9F6] text-[#1a1a1a] font-serif">
       {/* 導覽列 */}
-      {/* 導覽列 - 修正手機版擁擠問題 */}
-      <nav className="sticky top-0 z-50 border-b border-stone-200 bg-white/90 backdrop-blur-sm px-4 py-4 md:px-8 md:py-5">
-        <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto w-full gap-2 md:gap-0">
-          {/* 手機版會隱藏或縮小的左側文字 */}
-          <div className="text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] font-light text-stone-400 md:text-stone-900">
-            COLLECTIONS
-          </div>
+      <nav className="sticky top-0 z-50 border-b border-stone-200 bg-white/90 backdrop-blur-sm px-6 py-5">
+        <div className="flex flex-row items-center relative max-w-7xl mx-auto w-full">
           
-          {/* 品牌主標題 - 在手機版置中且加大一點點 */}
-          <div className="text-xl md:text-2xl tracking-[0.4em] md:tracking-[0.5em] font-bold py-1 md:py-0">
+          {/* 左側留白：為了讓 RIGHT 絕對置中，左側需要一個空的佔位符 */}
+          <div className="flex-1"></div>
+          
+          {/* 中間：品牌核心 */}
+          <div className="flex-1 text-center text-xl md:text-2xl tracking-[0.5em] font-bold">
             RIGHT
           </div>
           
-          {/* 右側文字 */}
-          <div className="text-[10px] md:text-sm tracking-[0.2em] md:tracking-[0.3em] font-light uppercase text-stone-400 md:text-stone-900">
-            Boutique
+          {/* 右側：COLLECTION 下拉選單 */}
+          <div className="flex-1 text-right relative">
+            <button 
+              onMouseEnter={() => setIsMenuOpen(true)}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-[10px] md:text-xs tracking-[0.3em] font-light text-stone-600 hover:text-stone-900 transition-colors uppercase flex items-center justify-end w-full"
+            >
+              COLLECTION
+              <span className={`ml-2 transition-transform duration-300 ${isMenuOpen ? 'rotate-180' : ''}`}>
+                ▾
+              </span>
+            </button>
+
+            {/* 下拉選單內容 */}
+            {isMenuOpen && (
+              <div 
+                onMouseLeave={() => setIsMenuOpen(false)}
+                className="absolute right-0 mt-4 w-48 bg-white border border-stone-100 shadow-xl py-4 z-[100] text-left animate-in fade-in slide-in-from-top-2"
+              >
+                <a href="#" className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">婚嫁系列 Bridal</a>
+                <a href="#" className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">高級訂製 High Jewelry</a>
+                <a href="#" className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">日常美學 Daily</a>
+                <div className="border-t border-stone-100 my-2"></div>
+                <a href="#" className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-800 font-bold hover:bg-stone-50 uppercase">查看全部探索</a>
+              </div>
+            )}
           </div>
         </div>
       </nav>
