@@ -18,12 +18,13 @@ export default function Home() {
       <main className="relative flex flex-col items-center justify-center px-8 py-32 text-center min-h-[70vh]">
         
         {/* --- 紅色區塊位置：COLLECTION 下拉選單 --- */}
-        <div className="absolute top-10 right-8 md:right-16 z-40">
+        {/* --- 浮動式 COLLECTION 下拉選單 --- */}
+        <div className="fixed top-24 right-8 md:right-16 z-[60]">
           <div className="relative inline-block text-right">
             <button 
               onMouseEnter={() => setIsMenuOpen(true)}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-[10px] md:text-xs tracking-[0.3em] font-light text-stone-600 hover:text-stone-900 transition-colors uppercase flex items-center gap-2"
+              className="bg-white/80 backdrop-blur-md border border-stone-200 px-4 py-2 rounded-sm text-[10px] md:text-xs tracking-[0.3em] font-light text-stone-600 hover:text-stone-900 transition-all uppercase flex items-center gap-2 shadow-sm"
             >
               COLLECTION
               <span className={`transition-transform duration-300 ${isMenuOpen ? 'rotate-180' : ''}`}>
@@ -35,7 +36,7 @@ export default function Home() {
             {isMenuOpen && (
               <div 
                 onMouseLeave={() => setIsMenuOpen(false)}
-                className="absolute right-0 mt-4 w-52 bg-white border border-stone-100 shadow-2xl py-4 z-50 text-left"
+                className="absolute right-0 mt-2 w-52 bg-white border border-stone-100 shadow-2xl py-4 z-[70] text-left"
               >
                 <a href="#" className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">婚嫁系列 Bridal</a>
                 <a href="#" className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">高級訂製 High Jewelry</a>
