@@ -10,7 +10,7 @@ export default function CollectionsPage() {
       id: 1,
       title: "經典鑽石系列",
       desc: "純淨無暇的永恆象徵",
-      image: "/diamond-ring.webp", // 已上傳的圖片 1
+      image: "/diamond-ring1.webp", // 已上傳的圖片 1
     },
     {
       id: 2,
