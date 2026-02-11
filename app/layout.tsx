@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Right - 正確的數位策略夥伴", // 修改這裡
-  description: "專注於 AI 驅動的品牌轉型解決方案", // 修改這裡
+  title: "RIGHT | 頂級珠寶訂製與美學展示", // 修改這裡
+  description: "Right 珠寶：以卓越工藝，點亮生命的璀璨時刻。", // 修改這裡
 };
 
 export default function RootLayout({
