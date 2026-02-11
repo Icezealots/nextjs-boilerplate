@@ -10,25 +10,25 @@ export default function CollectionsPage() {
       id: 1,
       title: "經典鑽石系列",
       desc: "純淨無暇的永恆象徵",
-      image: "/diamond-ring.jpg", // 已上傳的圖片 1
+      image: "/diamond-ring.webp", // 已上傳的圖片 1
     },
     {
       id: 2,
       title: "極致奢華系列",
       desc: "演繹永恆的璀璨時刻",
-      image: "/diamond-ring2.jpg", // 已上傳的圖片 2
+      image: "/diamond-ring2.webp", // 已上傳的圖片 2
     },
     {
       id: 3,
       title: "珍珠美學系列",
       desc: "優雅溫潤的海中瑰寶",
-      image: "", // 暫時留空，之後上傳後填入如 "/pearl.jpg"
+      image: "/diamond-ring3.webp", // 暫時留空，之後上傳後填入如 "/pearl.webp"
     },
     {
       id: 4,
       title: "有色寶石系列",
       desc: "繽紛璀璨的自然色彩",
-      image: "", // 暫時留空
+      image: "/diamond-ring4.webp", // 暫時留空
     },
   ];
 
