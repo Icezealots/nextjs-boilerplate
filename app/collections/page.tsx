@@ -1,102 +1,44 @@
-// app/lib/data.ts
+"use client";
 
-// 定義產品規格的類型 (為了讓開發更嚴謹)
-export interface Product {
-  id: string;
-  slug: string;
-  category: string; // 關聯系列用
-  name: string;
-  price: string;
-  desc: string;
-  material: string;
-  carat?: string; // 鑽石才有克拉
-  color?: string;
-  clarity?: string;
-  images: string[];
+import React from 'react';
+import Link from 'next/link';
+// 1. 引入剛剛建立的資料
+import { jewelryCategories } from '@/app/lib/data';
+
+export default function CollectionsPage() {
+  // 2. 直接使用 jewelryCategories
+  return (
+    <div className="min-h-screen bg-[#FAF9F6] text-[#1a1a1a] font-serif p-8">
+      <nav className="mb-16">
+        <Link href="/" className="text-[10px] tracking-[0.3em] text-stone-400 hover:text-stone-900 transition-colors uppercase">
+          ← Back to Home
+        </Link>
+      </nav>
+
+      <header className="text-center mb-20">
+        <h1 className="text-4xl md:text-6xl font-light tracking-widest uppercase mb-6">全部系列</h1>
+        <p className="text-stone-500 font-sans font-light tracking-widest text-xs uppercase">
+          探索 Right 珠寶的卓越工藝與永恆美學
+        </p>
+      </header>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+        {jewelryCategories.map((item) => (
+          <Link href={`/collections/${item.slug}`} key={item.id} className="group cursor-pointer">
+            {/* ... 下方的 UI 結構保持不變 ... */}
+            <div className="aspect-[3/4] bg-stone-200 mb-6 overflow-hidden relative flex items-center justify-center">
+              <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 flex items-center justify-center">
+                 <span className="text-white opacity-0 group-hover:opacity-100 text-[10px] tracking-[0.2em] border border-white p-2">VIEW COLLECTION</span>
+              </div>
+            </div>
+            <div className="text-center">
+              <h3 className="text-lg tracking-[0.2em] mb-2 uppercase">{item.title}</h3>
+              <p className="text-[10px] text-stone-500 font-sans tracking-widest leading-relaxed">{item.desc}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
 }
-
-// 定義系列分類的類型
-export interface Category {
-  id: string;
-  slug: string;
-  title: string;
-  desc: string;
-  image: string;
-  productSlugs: string[]; // 該系列下擁有的產品 slug
-}
-
-// 1. 全部產品資料庫
-export const allProducts: Record<string, Product> = {
-  "classic-ring": {
-    id: "p1",
-    slug: "classic-ring",
-    category: "diamond",
-    name: "18K 白金六爪鑽戒",
-    price: "NT$ 88,000",
-    desc: "這款經典的六爪鑲嵌設計，能讓光線從各個角度進入鑽石，極致釋放鑽石的璀璨光芒。",
-    material: "18K White Gold",
-    carat: "0.50 ct",
-    color: "D",
-    clarity: "VS1",
-    images: ["/diamond-ring1.webp", "/diamond-ring2.webp"]
-  },
-  "halo-ring": {
-    id: "p2",
-    slug: "halo-ring",
-    category: "diamond",
-    name: "光環璀璨鑲鑽戒指",
-    price: "NT$ 110,000",
-    desc: "主鑽周圍鑲嵌一圈小鑽，營造出放大主鑽效果的同時，增加了整體的閃耀感。",
-    material: "Platinum (鉑金)",
-    carat: "0.70 ct",
-    color: "E",
-    clarity: "VVS2",
-    images: ["/diamond-ring2.webp"]
-  },
-  "pearl-necklace": {
-    id: "p3",
-    slug: "pearl-necklace",
-    category: "pearl",
-    name: "大溪地黑珍珠項鍊",
-    price: "NT$ 45,000",
-    desc: "來自大溪地的神秘黑珍珠，泛著迷人的綠紫色光澤，襯托女性尊貴氣質。",
-    material: "18K Gold",
-    images: ["/diamond-ring3.webp"]
-  }
-};
-
-// 2. 全部系列資料庫
-export const jewelryCategories: Category[] = [
-  {
-    id: "c1",
-    slug: "diamond",
-    title: "經典鑽石系列",
-    desc: "純淨無暇的永恆象徵",
-    image: "/diamond-ring1.webp",
-    productSlugs: ["classic-ring", "halo-ring"]
-  },
-  {
-    id: "c2",
-    slug: "luxury",
-    title: "極致奢華系列",
-    desc: "演繹永恆的璀璨時刻",
-    image: "/diamond-ring2.webp",
-    productSlugs: ["halo-ring"]
-  },
-  {
-    id: "c3",
-    slug: "pearl",
-    title: "珍珠美學系列",
-    desc: "優雅溫潤的海中瑰寶",
-    image: "/diamond-ring3.webp",
-    productSlugs: ["pearl-necklace"]
-  },
-  {
-    id: "c4",
-    slug: "gemstone",
-    title: "有色寶石系列",
-    desc: "繽紛璀璨的自然色彩",
-    image: "/diamond-ring4.webp",
-    productSlugs: [] // 暫無商品
-  }
-];
