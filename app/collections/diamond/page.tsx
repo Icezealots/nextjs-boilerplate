@@ -8,7 +8,7 @@ export default function CategoryPage() {
 
   // 模擬產品資料（以後可以放進資料庫）
   const products = [
-    { id: 'p1', name: "18K 白金六爪鑽戒", price: "NT$ 88,000", img: "/diamond-ring1.webp" },
+    { id: 'p1', slug: "classic-ring", name: "18K 白金六爪鑽戒", price: "NT$ 88,000", img: "/diamond-ring1.webp" },
     { id: 'p2', name: "梨形切割典藏鑽戒", price: "NT$ 125,000", img: "/diamond-ring2.webp" },
   ];
 
