@@ -1,25 +1,41 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect } from 'react'; // 加入 useEffect 方便觀察
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { allProducts } from '@/app/lib/data';
 
 export default function ProductDetailPage() {
   const params = useParams();
-  const productId = params.productId as string;
-  const categoryId = params.id as string;
+  
+  // PM 除錯小技巧：在開發階段印出 params，看看 id 到底是不是 undefined
+  useEffect(() => {
+    console.log("當前網址參數 Params:", params);
+  }, [params]);
 
-  // 1. 抓取該產品的完整資料
+  const productId = params?.productId as string;
+  const categoryId = params?.id as string; // 確保與資料夾名稱 [id] 一致
+
   const product = allProducts[productId];
 
-  // 2. 找不到產品時的處理
-  if (!product) return <div className="p-20 text-center uppercase tracking-widest">Product Not Found</div>;
+  if (!product) {
+    return (
+      <div className="p-20 text-center uppercase tracking-widest font-serif">
+        Product Not Found
+        <br />
+        <Link href="/collections" className="text-xs text-stone-400 underline mt-4 block">Back to All Collections</Link>
+      </div>
+    );
+  }
+
+  // 💡 保險路徑：如果 categoryId 抓不到，就回大分類，不讓網址變成 /collections/undefined
+  const backLink = categoryId ? `/collections/${categoryId}` : "/collections";
 
   return (
     <div className="min-h-screen bg-[#FAF9F6] text-[#1a1a1a] font-serif">
       <nav className="p-8">
-        <Link href={`/collections/${categoryId}`} className="text-[10px] tracking-[0.2em] text-stone-400 hover:text-stone-900 transition-colors uppercase">
+        {/* 使用保險路徑 */}
+        <Link href={backLink} className="text-[10px] tracking-[0.2em] text-stone-400 hover:text-stone-900 transition-colors uppercase">
           ← Back to Collection
         </Link>
       </nav>
