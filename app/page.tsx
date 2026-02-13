@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-[#FAF9F6] text-[#1a1a1a] font-serif">
-      {/* 導覽列 - 現在只剩 RIGHT 置中 */}
+      {/* RIGHT 置中 */}
       <nav className="sticky top-0 z-50 border-b border-stone-200 bg-white/90 backdrop-blur-sm px-6 py-5">
         <div className="flex justify-center max-w-7xl mx-auto w-full">
           <div className="text-2xl tracking-[0.5em] font-bold">RIGHT</div>
@@ -18,7 +18,7 @@ export default function Home() {
       {/* Hero Section */}
       <main className="relative flex flex-col items-center justify-center px-8 py-32 text-center min-h-[70vh]">
         
-        {/* --- 紅色區塊位置：COLLECTION 下拉選單 --- */}
+
         {/* --- 浮動式 COLLECTION 下拉選單 --- */}
         <div className="fixed top-24 right-8 md:right-16 z-[60]">
           <div className="relative inline-block text-right">
@@ -39,11 +39,39 @@ export default function Home() {
                 onMouseLeave={() => setIsMenuOpen(false)}
                 className="absolute right-0 mt-2 w-52 bg-white border border-stone-100 shadow-2xl py-4 z-[70] text-left"
               >
-                <a href="#" className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">婚嫁系列 Bridal</a>
-                <a href="#" className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">高級訂製 High Jewelry</a>
-                <a href="#" className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">日常美學 Daily</a>
+                <Link 
+                  href="/collections/diamond" 
+                  onClick={() => setIsMenuOpen(false)} // 點擊後自動關閉選單
+                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase"
+                >
+                  經典鑽石系列 Bridal
+                </Link>
+            
+                <Link 
+                  href="/collections/luxury" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase"
+                >
+                  極致奢華系列 High Jewelry
+                </Link>
+            
+                <Link 
+                  href="/collections/pearl" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase"
+                >
+                  珍珠美學系列 Daily
+                </Link>
+            
                 <div className="border-t border-stone-100 my-2"></div>
-                <a href="#" className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-800 font-bold hover:bg-stone-50 uppercase text-center">探索精品門市</a>
+            
+                <Link 
+                  href="/collections/gemstone" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-800 font-bold hover:bg-stone-50 uppercase text-center"
+                >
+                  有色寶石系列
+                </Link>
               </div>
             )}
           </div>
