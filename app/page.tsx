@@ -76,7 +76,7 @@ export default function Home() {
             )}
           </div>
         </div>
-        {/* --- collection選單結束 --- */}
+        {/* --- 下拉選單結束 --- */}
 
         
         <div className="mb-8 tracking-[0.4em] text-xs text-stone-400 uppercase">Crafting Eternity Since 2026</div>
@@ -106,19 +106,32 @@ export default function Home() {
       {/* 展示區塊 */}
       <section className="py-24 px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="aspect-[3/4] bg-stone-100 flex flex-col items-center justify-center p-8">
-              <div className="text-lg tracking-[0.2em] mb-2">婚嫁系列</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            
+            {/* 1. 婚嫁系列 -> 對應 diamond */}
+            <Link href="/collections/diamond" className="group aspect-[3/4] bg-stone-100 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-200">
+              <div className="text-lg tracking-[0.2em] mb-2 group-hover:scale-110 transition-transform duration-700">婚嫁系列</div>
               <div className="text-[10px] tracking-[0.3em] text-stone-400 uppercase">Bridal Collection</div>
-            </div>
-            <div className="aspect-[3/4] bg-stone-200 flex flex-col items-center justify-center p-8">
-              <div className="text-lg tracking-[0.2em] mb-2">高級訂製</div>
+            </Link>
+      
+            {/* 2. 高級訂製 -> 對應 luxury */}
+            <Link href="/collections/luxury" className="group aspect-[3/4] bg-stone-200 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-300">
+              <div className="text-lg tracking-[0.2em] mb-2 group-hover:scale-110 transition-transform duration-700">高級訂製</div>
               <div className="text-[10px] tracking-[0.3em] text-stone-400 uppercase">High Jewelry</div>
-            </div>
-            <div className="aspect-[3/4] bg-stone-100 flex flex-col items-center justify-center p-8">
-              <div className="text-lg tracking-[0.2em] mb-2">日常美學</div>
+            </Link>
+      
+            {/* 3. 日常美學 -> 對應 pearl */}
+            <Link href="/collections/pearl" className="group aspect-[3/4] bg-stone-100 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-200">
+              <div className="text-lg tracking-[0.2em] mb-2 group-hover:scale-110 transition-transform duration-700">日常美學</div>
               <div className="text-[10px] tracking-[0.3em] text-stone-400 uppercase">Daily Essentials</div>
-            </div>
+            </Link>
+      
+            {/* 4. 有色寶石 -> 對應 gemstone (新增的第四個) */}
+            <Link href="/collections/gemstone" className="group aspect-[3/4] bg-stone-200 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-300">
+              <div className="text-lg tracking-[0.2em] mb-2 group-hover:scale-110 transition-transform duration-700">有色寶石</div>
+              <div className="text-[10px] tracking-[0.3em] text-stone-400 uppercase">Gemstone Series</div>
+            </Link>
+      
           </div>
         </div>
       </section>
