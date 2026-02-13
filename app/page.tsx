@@ -106,7 +106,7 @@ export default function Home() {
       {/* 展示區塊 */}
       <section className="py-24 px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
             
             {/* 1. 婚嫁系列 -> 對應 diamond */}
             <Link href="/collections/diamond" className="group aspect-[3/4] bg-stone-100 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-200">
@@ -125,13 +125,7 @@ export default function Home() {
               <div className="text-lg tracking-[0.2em] mb-2 group-hover:scale-110 transition-transform duration-700">日常美學</div>
               <div className="text-[10px] tracking-[0.3em] text-stone-400 uppercase">Daily Essentials</div>
             </Link>
-      
-            {/* 4. 有色寶石 -> 對應 gemstone (新增的第四個) */}
-            <Link href="/collections/gemstone" className="group aspect-[3/4] bg-stone-200 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-300">
-              <div className="text-lg tracking-[0.2em] mb-2 group-hover:scale-110 transition-transform duration-700">有色寶石</div>
-              <div className="text-[10px] tracking-[0.3em] text-stone-400 uppercase">Gemstone Series</div>
-            </Link>
-      
+    
           </div>
         </div>
       </section>
