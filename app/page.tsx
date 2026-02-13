@@ -76,7 +76,9 @@ export default function Home() {
             )}
           </div>
         </div>
-        {/* --- 紅色區塊結束 --- */}
+        {/* --- collection選單結束 --- */}
+
+        
         <div className="mb-8 tracking-[0.4em] text-xs text-stone-400 uppercase">Crafting Eternity Since 2026</div>
         <h1 className="mb-10 text-5xl md:text-7xl font-light tracking-widest leading-tight">
           點亮生命的<br />
