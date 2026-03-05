@@ -13,8 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RIGHT | 頂級珠寶訂製與美學展示", // 修改這裡
-  description: "Right 珠寶：以卓越工藝，點亮生命的璀璨時刻。", // 修改這裡
+  title: "RIGHT | 頂級珠寶訂製與美學展示",
+  description: "Right 珠寶：以卓越工藝，點亮生命的璀璨時刻。",
+  openGraph: {
+    title: "RIGHT 頂級珠寶訂製",
+    description: "卓越工藝，點亮生命的璀璨時刻。",
+    images: ["/og-image.jpg"], // 建議放一張高品質的珠寶情境圖
+    type: "website",
+  },
 };
 
 export default function RootLayout({
