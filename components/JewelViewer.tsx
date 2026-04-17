@@ -22,7 +22,7 @@ export default function JewelViewer() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(W(), H());
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.4;
+    renderer.toneMappingExposure = 2.2;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -43,30 +43,41 @@ export default function JewelViewer() {
     controls.minPolarAngle = Math.PI * 0.2;
     controls.maxPolarAngle = Math.PI * 0.75;
 
-    // === LIGHTS — warm tone matching site (#FAF9F6 / stone palette) ===
-    const ambient = new THREE.AmbientLight(0xfff8f0, 0.6);
+    // === LIGHTS ===
+    // 環境光大幅提亮，避免暗面全黑
+    const ambient = new THREE.AmbientLight(0xfff8f0, 2.5);
     scene.add(ambient);
 
     // 主要暖白光
-    const keyLight = new THREE.DirectionalLight(0xfffaf0, 2.5);
+    const keyLight = new THREE.DirectionalLight(0xfffaf0, 3.0);
     keyLight.position.set(2, 4, 3);
     keyLight.castShadow = true;
     scene.add(keyLight);
 
-    // 金色補光（戒指金屬感）
-    const goldFill = new THREE.PointLight(0xd4a96e, 2.0, 2);
+    // 正面補光（讓戒環正面夠亮）
+    const frontLight = new THREE.DirectionalLight(0xfff5e8, 2.0);
+    frontLight.position.set(0, 1, 5);
+    scene.add(frontLight);
+
+    // 金色補光
+    const goldFill = new THREE.PointLight(0xd4a96e, 2.5, 3);
     goldFill.position.set(-0.5, 0.3, 0.5);
     scene.add(goldFill);
 
-    // 冷色 rim light（增加鑽石折射感）
-    const rimLight = new THREE.DirectionalLight(0xe8f0ff, 1.0);
+    // 冷色 rim light
+    const rimLight = new THREE.DirectionalLight(0xe8f0ff, 1.5);
     rimLight.position.set(-2, 1, -2);
     scene.add(rimLight);
 
     // 底部反射
-    const bottomLight = new THREE.PointLight(0xfff5e0, 0.8, 1.5);
+    const bottomLight = new THREE.PointLight(0xfff5e0, 1.5, 2);
     bottomLight.position.set(0, -0.5, 0);
     scene.add(bottomLight);
+
+    // 左側補光（填補暗面）
+    const leftLight = new THREE.DirectionalLight(0xffeedd, 1.5);
+    leftLight.position.set(-3, 2, 1);
+    scene.add(leftLight);
 
     // === LOAD GLB ===
     const loader = new GLTFLoader();
@@ -89,30 +100,32 @@ export default function JewelViewer() {
           const name = mat.name?.toLowerCase() || '';
 
           if (name.includes('crystal') || name.includes('diamond')) {
-            // 鑽石：高透射、高折射
+            // 鑽石：降低 transmission，加淡藍色調，看起來更有寶石感
             const crystalMat = new THREE.MeshPhysicalMaterial({
-              color: 0xffffff,
+              color: 0xe8f4ff,
               metalness: 0.0,
-              roughness: 0.0,
-              transmission: 0.95,
-              thickness: 0.5,
+              roughness: 0.05,
+              transmission: 0.6,
+              thickness: 1.2,
               ior: 2.42,
               reflectivity: 1.0,
               clearcoat: 1.0,
               clearcoatRoughness: 0.0,
               transparent: true,
-              opacity: 0.9,
+              opacity: 0.85,
+              envMapIntensity: 2.0,
             });
             child.material = crystalMat;
           } else if (name.includes('metal') || name.includes('gold') || name.includes('ring')) {
-            // 金屬：配合網站石英色調，走黃金/玫瑰金
+            // 金屬：提高 roughness 讓暗面不要全黑，走明亮黃金
             const metalMat = new THREE.MeshPhysicalMaterial({
               color: 0xd4af70,
               metalness: 1.0,
-              roughness: 0.15,
+              roughness: 0.35,
               reflectivity: 1.0,
-              clearcoat: 0.3,
+              clearcoat: 0.5,
               clearcoatRoughness: 0.1,
+              envMapIntensity: 1.5,
             });
             child.material = metalMat;
           }
