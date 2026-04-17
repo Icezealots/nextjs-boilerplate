@@ -2,6 +2,10 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+// dynamic import 避免 SSR 問題（Three.js 需要 browser 環境）
+const JewelViewer = dynamic(() => import('@/components/JewelViewer'), { ssr: false });
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,61 +19,41 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <main className="relative flex flex-col items-center justify-center px-8 py-32 text-center min-h-[70vh]">
-        
+      {/* Hero Section — 改為左右分割 */}
+      <main className="relative flex flex-col md:flex-row items-center justify-center px-8 md:px-16 py-16 md:py-0 min-h-[85vh] gap-8">
 
         {/* --- 浮動式 COLLECTION 下拉選單 --- */}
         <div className="fixed top-24 right-8 md:right-16 z-[60]">
           <div className="relative inline-block text-right">
-            <button 
+            <button
               onMouseEnter={() => setIsMenuOpen(true)}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="bg-white/80 backdrop-blur-md border border-stone-200 px-4 py-2 rounded-sm text-[10px] md:text-xs tracking-[0.3em] font-light text-stone-600 hover:text-stone-900 transition-all uppercase flex items-center gap-2 shadow-sm"
             >
               COLLECTION
-              <span className={`transition-transform duration-300 ${isMenuOpen ? 'rotate-180' : ''}`}>
-                ▾
-              </span>
+              <span className={`transition-transform duration-300 ${isMenuOpen ? 'rotate-180' : ''}`}>▾</span>
             </button>
 
-            {/* 下拉選單內容 */}
             {isMenuOpen && (
-              <div 
+              <div
                 onMouseLeave={() => setIsMenuOpen(false)}
                 className="absolute right-0 mt-2 w-52 bg-white border border-stone-100 shadow-2xl py-4 z-[70] text-left"
               >
-                <Link 
-                  href="/collections/diamond" 
-                  onClick={() => setIsMenuOpen(false)} // 點擊後自動關閉選單
-                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase"
-                >
+                <Link href="/collections/diamond" onClick={() => setIsMenuOpen(false)}
+                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">
                   經典鑽石系列 Bridal
                 </Link>
-            
-                <Link 
-                  href="/collections/luxury" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase"
-                >
+                <Link href="/collections/luxury" onClick={() => setIsMenuOpen(false)}
+                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">
                   極致奢華系列 High Jewelry
                 </Link>
-            
-                <Link 
-                  href="/collections/pearl" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase"
-                >
+                <Link href="/collections/pearl" onClick={() => setIsMenuOpen(false)}
+                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-500 hover:bg-stone-50 hover:text-stone-900 uppercase">
                   珍珠美學系列 Daily
                 </Link>
-            
                 <div className="border-t border-stone-100 my-2"></div>
-            
-                <Link 
-                  href="/collections/gemstone" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-800 font-bold hover:bg-stone-50 uppercase text-center"
-                >
+                <Link href="/collections/gemstone" onClick={() => setIsMenuOpen(false)}
+                  className="block px-6 py-3 text-[10px] tracking-[0.2em] text-stone-800 font-bold hover:bg-stone-50 uppercase text-center">
                   有色寶石系列
                 </Link>
               </div>
@@ -78,54 +62,55 @@ export default function Home() {
         </div>
         {/* --- 下拉選單結束 --- */}
 
-        
-        <div className="mb-8 tracking-[0.4em] text-xs text-stone-400 uppercase">Crafting Eternity Since 2026</div>
-        <h1 className="mb-10 text-5xl md:text-7xl font-light tracking-widest leading-tight">
-          點亮生命的<br />
-          <span className="italic text-stone-600">璀璨時刻</span>
-        </h1>
-        <p className="mb-14 max-w-xl text-stone-500 leading-relaxed font-sans font-light tracking-wide">
-          Right 珠寶不僅是飾品，更是工藝與情感的傳承。<br />
-          每一顆寶石都經過嚴格篩選，只為呈現最純粹的光輝。
-        </p>
-        <div className="flex flex-col gap-6 sm:flex-row font-sans uppercase tracking-[0.2em] text-xs">
-          
-          {/*
-          <button className="bg-[#1a1a1a] px-12 py-5 text-white hover:bg-stone-800 transition-all duration-500">
-            預約專屬鑑賞
-          </button>
-          */}
-          
-          {/* 修改這裡：Link到collection頁面 */}
-          <Link href="/collections" className="border border-stone-300 px-12 py-5 hover:bg-white transition-all duration-500 inline-block text-center cursor-pointer">
-            探索全系列
-          </Link>
+        {/* 左側：文字 */}
+        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left max-w-lg">
+          <div className="mb-8 tracking-[0.4em] text-xs text-stone-400 uppercase">
+            Crafting Eternity Since 2026
+          </div>
+          <h1 className="mb-10 text-5xl md:text-6xl lg:text-7xl font-light tracking-widest leading-tight">
+            點亮生命的<br />
+            <span className="italic text-stone-600">璀璨時刻</span>
+          </h1>
+          <p className="mb-14 max-w-xl text-stone-500 leading-relaxed font-sans font-light tracking-wide">
+            Right 珠寶不僅是飾品，更是工藝與情感的傳承。<br />
+            每一顆寶石都經過嚴格篩選，只為呈現最純粹的光輝。
+          </p>
+          <div className="flex flex-col gap-6 sm:flex-row font-sans uppercase tracking-[0.2em] text-xs">
+            <Link href="/collections"
+              className="border border-stone-300 px-12 py-5 hover:bg-white transition-all duration-500 inline-block text-center cursor-pointer">
+              探索全系列
+            </Link>
+          </div>
         </div>
+
+        {/* 右側：3D 戒指 */}
+        <div className="flex-1 flex items-center justify-center w-full">
+          <div className="w-full max-w-sm md:max-w-md aspect-square">
+            <JewelViewer />
+          </div>
+        </div>
+
       </main>
 
       {/* 展示區塊 */}
       <section className="py-24 px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
-            
-            {/* 1. 婚嫁系列 -> 對應 diamond */}
-            <Link href="/collections/diamond" className="group aspect-[3/4] bg-stone-100 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-200">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Link href="/collections/diamond"
+              className="group aspect-[3/4] bg-stone-100 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-200">
               <div className="text-lg tracking-[0.2em] mb-2 group-hover:scale-110 transition-transform duration-700">婚嫁系列</div>
               <div className="text-[10px] tracking-[0.3em] text-stone-400 uppercase">Bridal Collection</div>
             </Link>
-      
-            {/* 2. 高級訂製 -> 對應 luxury */}
-            <Link href="/collections/luxury" className="group aspect-[3/4] bg-stone-200 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-300">
+            <Link href="/collections/luxury"
+              className="group aspect-[3/4] bg-stone-200 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-300">
               <div className="text-lg tracking-[0.2em] mb-2 group-hover:scale-110 transition-transform duration-700">高級訂製</div>
               <div className="text-[10px] tracking-[0.3em] text-stone-400 uppercase">High Jewelry</div>
             </Link>
-      
-            {/* 3. 日常美學 -> 對應 pearl */}
-            <Link href="/collections/pearl" className="group aspect-[3/4] bg-stone-100 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-200">
+            <Link href="/collections/pearl"
+              className="group aspect-[3/4] bg-stone-100 flex flex-col items-center justify-center p-8 transition-all hover:bg-stone-200">
               <div className="text-lg tracking-[0.2em] mb-2 group-hover:scale-110 transition-transform duration-700">日常美學</div>
               <div className="text-[10px] tracking-[0.3em] text-stone-400 uppercase">Daily Essentials</div>
             </Link>
-    
           </div>
         </div>
       </section>
